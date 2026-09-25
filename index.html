@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Walsall Stop & Search and Use of Force Scrutiny Panel</title>
+<meta name="description"
+      content="Walsall Stop & Search and Use of Force Scrutiny Panel — panel information, recruitment, meetings and calendar.">
+<style>
+/* =========================================================
+   RESET
+   ========================================================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+html {
+    scroll-behavior: smooth;
+}
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+    color: #ffffff;
+    /* WALLPAPER — original image and overlay */
+    background-image:
+        linear-gradient(
+            rgba(2, 20, 38, 0.82),
+            rgba(2, 20, 38, 0.90)
+        ),
+        url("WhatsApp Image 2026-09-24 at 16.41.05.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+/* =========================================================
+   PAGE
+   ========================================================= */
+.page {
+    min-height: 100vh;
+    padding: 30px 18px 50px;
+}
+.container {
+    width: 100%;
+    max-width: 1150px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+/* =========================================================
+   HERO
+   ========================================================= */
+.hero {
+    text-align: center;
+    padding: 35px 25px 30px;
+    background: rgba(3, 27, 50, 0.84);
+    border: 1px solid rgba(255, 202, 54, 0.45);
+    border-radius: 22px;
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255,255,255,0.08);
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+}
+.hero-logo {
+    width: 145px;
+    height: 145px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    display: block;
+    border: 4px solid #f7c83b;
+    box-shadow:
+        0 8px 30px rgba(0,0,0,0.45);
+}
+.hero h1 {
+    font-size: clamp(28px, 5vw, 48px);
+    line-height: 1.1;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    color: #ffffff;
+}
+.hero h1 span {
+    color: #f7c83b;
+}
+.hero p {
+    max-width: 800px;
+    margin: 0 auto;
+    color: #dce8f2;
+    font-size: 17px;
+    line-height: 1.6;
+}
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+.actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 25px;
+}
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+.button:hover {
+    transform: translateY(-3px);
+}
+.button-primary {
+    background: #f7c83b;
+    color: #06213b;
+    box-shadow:
+        0 8px 22px rgba(0,0,0,0.25);
+}
+.button-primary:hover {
+    background: #ffd75e;
+    box-shadow:
+        0 12px 28px rgba(0,0,0,0.35);
+}
+.button-secondary {
+    background: rgba(255,255,255,0.08);
+    color: #ffffff;
+    border: 1px solid rgba(255,255,255,0.25);
+}
+.button-secondary:hover {
+    background: rgba(255,255,255,0.15);
+}
+/* =========================================================
+   INTRODUCTION CARDS
+   ========================================================= */
+.intro-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+.card {
+    background: rgba(3, 27, 50, 0.84);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
+    padding: 26px;
+    box-shadow:
+        0 15px 45px rgba(0,0,0,0.25);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+.card h2 {
+    color: #f7c83b;
+    font-size: 22px;
+    margin-bottom: 12px;
+}
+.card p {
+    color: #dce8f2;
+    line-height: 1.65;
+    font-size: 15px;
+}
+/* =========================================================
+   RECRUITMENT SECTION
+   ========================================================= */
+.recruitment-section {
+    background: rgba(3, 27, 50, 0.90);
+    border: 1px solid rgba(247, 200, 59, 0.55);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow:
+        0 20px 60px rgba(0,0,0,0.35);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+.recruitment-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+.recruitment-header h2 {
+    font-size: 30px;
+    margin-bottom: 8px;
+    color: #ffffff;
+}
+.recruitment-header h2 span {
+    color: #f7c83b;
+}
+.recruitment-header p {
+    color: #c7d6e2;
+    font-size: 15px;
+    line-height: 1.6;
+}
+.recruitment-content {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: 28px;
+    align-items: stretch;
+}
+/* Audio panel */
+.recruitment-audio {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 14px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.recruitment-audio h3 {
+    color: #f7c83b;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.recruitment-audio p {
+    color: #dce8f2;
+    line-height: 1.6;
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+.recruitment-audio audio {
+    width: 100%;
+    height: 45px;
+}
+.recruitment-audio audio::-webkit-media-controls-overflow-button,
+.recruitment-audio audio::-webkit-media-controls-overflow-menu-button,
+.recruitment-audio audio::-internal-media-controls-download-button {
+    display: none;
+}
+/* QR panel */
+.recruitment-qr {
+    text-align: center;
+    background: rgba(255,255,255,0.96);
+    border-radius: 14px;
+    padding: 16px 14px 14px;
+    box-shadow:
+        0 10px 35px rgba(0,0,0,0.30);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.qr-frame {
+    width: 132px;
+    height: 132px;
+    padding: 8px;
+    background: #ffffff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.recruitment-qr img {
+    display: block;
+    width: 116px;
+    height: 116px;
+    object-fit: contain;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+.recruitment-qr p {
+    color: #06213b;
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 1.4;
+    margin-top: 10px;
+    max-width: 160px;
+}
+/* =========================================================
+   CALENDAR
+   ========================================================= */
+.calendar-section {
+    background: rgba(3, 27, 50, 0.90);
+    border: 1px solid rgba(247, 200, 59, 0.4);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow:
+        0 20px 60px rgba(0,0,0,0.35);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+.calendar-heading {
+    text-align: center;
+    margin-bottom: 22px;
+}
+.calendar-heading h2 {
+    font-size: 30px;
+    color: #ffffff;
+    margin-bottom: 7px;
+}
+.calendar-heading h2 span {
+    color: #f7c83b;
+}
+.calendar-heading p {
+    color: #b9cad8;
+    font-size: 14px;
+}
+.calendar-frame {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow:
+        0 10px 35px rgba(0,0,0,0.3);
+}
+.calendar-frame iframe {
+    display: block;
+    width: 100%;
+    min-height: 650px;
+    border: 0;
+}
+/* =========================================================
+   CONTACT
+   ========================================================= */
+.contact-section {
+    background: rgba(3, 27, 50, 0.90);
+    border: 1px solid rgba(247, 200, 59, 0.55);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+.contact-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+.contact-header h2 {
+    font-size: 30px;
+    margin-bottom: 8px;
+    color: #ffffff;
+}
+.contact-header h2 span {
+    color: #f7c83b;
+}
+.contact-header p {
+    color: #c7d6e2;
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 720px;
+    margin: 0 auto;
+}
+.contact-form {
+    max-width: 720px;
+    margin: 0 auto;
+    display: grid;
+    gap: 16px;
+}
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+.form-field label {
+    color: #f7c83b;
+    font-size: 14px;
+    font-weight: bold;
+}
+.form-field input,
+.form-field textarea {
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.06);
+    color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    padding: 12px 14px;
+}
+.form-field input:focus,
+.form-field textarea:focus {
+    outline: 2px solid #f7c83b;
+    outline-offset: 1px;
+}
+.form-field textarea {
+    min-height: 140px;
+    resize: vertical;
+}
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+    color: #9fb0be;
+}
+.hp-field {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+    height: 0;
+    width: 0;
+    overflow: hidden;
+}
+.form-note {
+    color: #b9cad8;
+    font-size: 13px;
+    line-height: 1.5;
+}
+.form-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+.button-submit {
+    border: 0;
+    cursor: pointer;
+    min-width: 160px;
+}
+.button-submit:disabled {
+    opacity: 0.7;
+    cursor: wait;
+    transform: none;
+}
+.form-status {
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1.45;
+}
+.form-status.success {
+    color: #f7c83b;
+}
+.form-status.error {
+    color: #ffb4b4;
+}
+/* =========================================================
+   FOOTER
+   ========================================================= */
+footer {
+    text-align: center;
+    padding: 8px 12px 4px;
+    color: #aebfcd;
+    font-size: 13px;
+}
+footer .gold {
+    color: #f7c83b;
+}
+/* =========================================================
+   MOBILE
+   ========================================================= */
+@media (max-width: 750px) {
+    .page {
+        padding: 15px 10px 35px;
+    }
+    .hero {
+        padding: 25px 17px;
+        border-radius: 16px;
+    }
+    .hero-logo {
+        width: 115px;
+        height: 115px;
+    }
+    .hero h1 {
+        font-size: 27px;
+    }
+    .hero p {
+        font-size: 15px;
+    }
+    .intro-grid {
+        grid-template-columns: 1fr;
+    }
+    .card {
+        padding: 21px;
+    }
+    .recruitment-section {
+        padding: 18px;
+    }
+    .recruitment-header h2 {
+        font-size: 26px;
+    }
+    .recruitment-content {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    .recruitment-audio {
+        padding: 20px;
+    }
+    .recruitment-qr {
+        max-width: 220px;
+        margin: 0 auto;
+        width: 100%;
+    }
+    .calendar-section {
+        padding: 12px;
+        border-radius: 15px;
+    }
+    .calendar-heading h2 {
+        font-size: 24px;
+    }
+    .calendar-frame iframe {
+        min-height: 650px;
+    }
+    .contact-section {
+        padding: 18px;
+    }
+    .contact-header h2 {
+        font-size: 26px;
+    }
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    .button,
+    .button-submit {
+        width: 100%;
+    }
+}
+</style>
+</head>
+<body>
+<div class="page">
+<div class="container">
+<header class="hero">
+    <img
+        src="WhatsApp Image 2026-09-24 at 16.41.05.jpeg"
+        alt="Walsall Stop and Search & Use of Force Scrutiny Panel"
+        class="hero-logo"
+    >
+    <h1>
+        Walsall <span>Stop & Search</span><br>
+        and Use of Force Scrutiny Panel
+    </h1>
+    <p>
+        Information, resources and meeting dates for the
+        Walsall Stop & Search and Use of Force Scrutiny Panel.
+    </p>
+    <div class="actions">
+        <a
+            class="button button-primary"
+            href="https://www.westmidlands-pcc.gov.uk/governance/stop-search/stop-and-search-scrutiny-panels/walsall-stop-and-search-scrutiny-panel/"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            Visit WMPCC Panel Page ↗
+        </a>
+        <a class="button button-secondary" href="#recruitment">Recruitment ↓</a>
+        <a class="button button-secondary" href="#calendar">View Meeting Calendar ↓</a>
+        <a class="button button-secondary" href="#contact">Contact ↓</a>
+    </div>
+</header>
+<section class="intro-grid">
+    <div class="card">
+        <h2>Stop & Search</h2>
+        <p>
+            This hub provides a central point for information
+            relating to the Walsall Stop & Search and Use of Force
+            Scrutiny Panel, including panel meeting dates and
+            links to the relevant WMPCC information.
+        </p>
+    </div>
+    <div class="card">
+        <h2>Panel Information</h2>
+        <p>
+            For the official panel information, documentation
+            and wider information provided by the West Midlands
+            Police and Crime Commissioner, please use the
+            WMPCC panel page linked above.
+        </p>
+    </div>
+</section>
+<section class="recruitment-section" id="recruitment">
+    <div class="recruitment-header">
+        <h2>
+            <span>Join</span> the Scrutiny Panel
+        </h2>
+        <p>
+            Find out more about becoming involved with the
+            Walsall Stop & Search and Use of Force Scrutiny Panel.
+        </p>
+    </div>
+    <div class="recruitment-content">
+        <div class="recruitment-audio">
+            <h3>Listen to the recruitment message</h3>
+            <p>
+                Find out more about the panel, its work and
+                opportunities to get involved.
+            </p>
+            <audio
+                controls
+                preload="auto"
+                controlsList="nodownload noplaybackrate"
+                disablePictureInPicture
+                oncontextmenu="return false;"
+            >
+                <source src="SSUOF Recruitment.mp3" type="audio/mpeg">
+                Your browser does not support the audio player.
+            </audio>
+        </div>
+        <div class="recruitment-qr">
+            <div class="qr-frame">
+                <img
+                    src="Recruitment QR Code.png"
+                    width="116"
+                    height="116"
+                    alt="QR Code for Walsall Stop and Search and Use of Force Scrutiny Panel recruitment"
+                >
+            </div>
+            <p>
+                Scan the QR code to find out more
+                about recruitment.
+            </p>
+        </div>
+    </div>
+</section>
+<section class="calendar-section" id="calendar">
+    <div class="calendar-heading">
+        <h2>
+            Panel <span>Calendar</span>
+        </h2>
+        <p>
+            Upcoming meetings and scheduled panel activity
+        </p>
+    </div>
+    <div class="calendar-frame">
+        <iframe
+            src="https://calendar.google.com/calendar/embed?src=42f02e8ba53b74c140f6f5bcabc249f559dc8295c69dc1c49c10b2014d42f7d5%40group.calendar.google.com&ctz=Europe%2FLondon"
+            width="800"
+            height="600"
+            frameborder="0"
+            scrolling="no"
+            title="Walsall Stop and Search and Use of Force Scrutiny Panel Calendar"
+        >
+        </iframe>
+    </div>
+</section>
+<section class="contact-section" id="contact">
+    <div class="contact-header">
+        <h2>
+            <span>Contact</span> the Panel
+        </h2>
+        <p>
+            Use this form to get in touch about panel membership,
+            meetings or general enquiries. Please do not send
+            crime reports or operational police matters here.
+        </p>
+    </div>
+    <form class="contact-form" id="contact-form" action="https://formspree.io/f/mkjgzebe" method="POST">
+        <input type="hidden" name="_subject" value="Walsall Scrutiny Panel website enquiry">
+        <div class="hp-field" aria-hidden="true">
+            <label for="website">Website</label>
+            <input type="text" id="website" name="_gotcha" tabindex="-1" autocomplete="off">
+        </div>
+        <div class="form-row">
+            <div class="form-field">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" autocomplete="name" required placeholder="Your name">
+            </div>
+            <div class="form-field">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" autocomplete="email" required placeholder="you@example.com">
+            </div>
+        </div>
+        <div class="form-field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required placeholder="How can the panel help?"></textarea>
+        </div>
+        <p class="form-note">
+            Your message is sent privately to the panel. Your email
+            address is used only to reply to this enquiry.
+        </p>
+        <div class="form-actions">
+            <button class="button button-primary button-submit" type="submit" id="contact-submit">
+                Send message
+            </button>
+            <p class="form-status" id="contact-status" role="status" aria-live="polite"></p>
+        </div>
+    </form>
+</section>
+<footer>
+    Walsall Stop & Search and Use of Force Scrutiny Panel
+    <br>
+    <br>
+    <span class="gold">
+        Accountability&nbsp; • &nbsp;Fairness&nbsp; • &nbsp;Trust
+    </span>
+</footer>
+</div>
+</div>
+<script>
+(function () {
+    var form = document.getElementById("contact-form");
+    var status = document.getElementById("contact-status");
+    var button = document.getElementById("contact-submit");
+    if (!form) return;
+
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        status.className = "form-status";
+        status.textContent = "Sending…";
+        button.disabled = true;
+
+        fetch("https://formspree.io/f/mkjgzebe", {
+            method: "POST",
+            body: new FormData(form),
+            headers: { "Accept": "application/json" }
+        }).then(function (response) {
+            if (response.ok) {
+                form.reset();
+                status.className = "form-status success";
+                status.textContent = "Thank you. Your message has been sent.";
+            } else {
+                return response.json().then(function (data) {
+                    throw new Error((data && data.error) || "Please check the form and try again.");
+                });
+            }
+        }).catch(function () {
+            status.className = "form-status error";
+            status.textContent = "Sorry, the message could not be sent. Please try again shortly.";
+        }).finally(function () {
+            button.disabled = false;
+        });
+    });
+})();
+</script>
+</body>
+</html>
