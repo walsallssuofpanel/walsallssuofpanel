@@ -301,6 +301,18 @@ body {
     color: #b9cad8;
     font-size: 14px;
 }
+.calendar-toolbar {
+    display: flex;
+    justify-content: center;
+    margin: 14px 0 0;
+}
+.calendar-refresh {
+    border: 0;
+    cursor: pointer;
+    min-height: 40px;
+    padding: 10px 18px;
+    font-size: 14px;
+}
 .calendar-frame {
     width: 100%;
     overflow: hidden;
@@ -617,17 +629,27 @@ footer .gold {
         <p>
             Upcoming meetings and scheduled panel activity
         </p>
+        <div class="calendar-toolbar">
+            <button
+                type="button"
+                class="button button-secondary calendar-refresh"
+                id="calendar-refresh"
+            >
+                Reload calendar
+            </button>
+        </div>
     </div>
     <div class="calendar-frame">
         <iframe
-    src="https://calendar.google.com/calendar/embed?src=walsallssuofpanel%40gmail.com&ctz=Europe%2FLondon"
-    width="800"
-    height="600"
-    frameborder="0"
-    scrolling="no"
-    title="Walsall Stop and Search and Use of Force Scrutiny Panel Calendar"
->
-</iframe>
+            id="panel-calendar"
+            src="https://calendar.google.com/calendar/embed?src=walsallssuofpanel%40gmail.com&ctz=Europe%2FLondon"
+            width="800"
+            height="600"
+            frameborder="0"
+            scrolling="no"
+            title="Walsall Stop and Search and Use of Force Scrutiny Panel Calendar"
+        >
+        </iframe>
     </div>
 </section>
 <section class="contact-section" id="contact">
@@ -688,6 +710,16 @@ footer .gold {
     var form = document.getElementById("contact-form");
     var status = document.getElementById("contact-status");
     var button = document.getElementById("contact-submit");
+    var calendar = document.getElementById("panel-calendar");
+    var reloadBtn = document.getElementById("calendar-refresh");
+    var calendarSrc = calendar ? calendar.getAttribute("src") : "";
+
+    if (reloadBtn && calendar && calendarSrc) {
+        reloadBtn.addEventListener("click", function () {
+            calendar.src = calendarSrc;
+        });
+    }
+
     if (!form) return;
 
     form.addEventListener("submit", function (event) {
