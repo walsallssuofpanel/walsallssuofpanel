@@ -303,6 +303,12 @@ body {
     min-height: 650px;
     border: 0;
 }
+.calendar-desktop {
+    display: block;
+}
+.calendar-mobile {
+    display: none;
+}
 .contact-section {
     background: rgba(3, 27, 50, 0.90);
     border: 1px solid rgba(247, 200, 59, 0.55);
@@ -475,7 +481,13 @@ footer .gold {
         font-size: 24px;
     }
     .calendar-frame iframe {
-        min-height: 650px;
+        min-height: 520px;
+    }
+    .calendar-desktop {
+        display: none;
+    }
+    .calendar-mobile {
+        display: block;
     }
     .contact-section {
         padding: 18px;
@@ -609,7 +621,19 @@ footer .gold {
     <div class="calendar-frame">
         <iframe
             id="panel-calendar"
-            src="https://calendar.google.com/calendar/embed?src=walsallssuofpanel%40gmail.com&ctz=Europe%2FLondon"
+            class="calendar-desktop"
+            src="https://calendar.google.com/calendar/embed?src=walsallssuofpanel%40gmail.com&ctz=Europe%2FLondon&mode=MONTH"
+            width="800"
+            height="600"
+            frameborder="0"
+            scrolling="no"
+            title="Walsall Stop and Search and Use of Force Scrutiny Panel Calendar"
+        >
+        </iframe>
+        <iframe
+            id="panel-calendar-mobile"
+            class="calendar-mobile"
+            src="https://calendar.google.com/calendar/embed?src=walsallssuofpanel%40gmail.com&ctz=Europe%2FLondon&mode=AGENDA"
             width="800"
             height="600"
             frameborder="0"
@@ -678,12 +702,15 @@ footer .gold {
     var status = document.getElementById("contact-status");
     var button = document.getElementById("contact-submit");
     var calendar = document.getElementById("panel-calendar");
+    var calendarMobile = document.getElementById("panel-calendar-mobile");
     var reloadBtn = document.getElementById("calendar-refresh");
     var calendarSrc = calendar ? calendar.getAttribute("src") : "";
+    var calendarMobileSrc = calendarMobile ? calendarMobile.getAttribute("src") : "";
 
-    if (reloadBtn && calendar && calendarSrc) {
+    if (reloadBtn) {
         reloadBtn.addEventListener("click", function () {
-            calendar.src = calendarSrc;
+            if (calendar && calendarSrc) calendar.src = calendarSrc;
+            if (calendarMobile && calendarMobileSrc) calendarMobile.src = calendarMobileSrc;
         });
     }
 
