@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chair's Updates — Walsall Stop & Search and Use of Force Scrutiny Panel</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+    color: #ffffff;
+    background-image:
+        linear-gradient(rgba(2, 20, 38, 0.82), rgba(2, 20, 38, 0.90)),
+        url("Walsall SSUOF Logo.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+.page { min-height: 100vh; padding: 30px 18px 50px; }
+.container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+.hero {
+    text-align: center;
+    padding: 30px 25px 25px;
+    background: rgba(3, 27, 50, 0.84);
+    border: 1px solid rgba(255, 202, 54, 0.45);
+    border-radius: 22px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255,255,255,0.08);
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+}
+.hero-logo {
+    width: 110px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: 0 auto 18px;
+    display: block;
+    border: 4px solid #f7c83b;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.45);
+}
+.hero h1 {
+    font-size: clamp(24px, 4.5vw, 36px);
+    line-height: 1.15;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+.hero h1 span { color: #f7c83b; }
+.hero p {
+    max-width: 620px;
+    margin: 0 auto;
+    color: #dce8f2;
+    font-size: 16px;
+    line-height: 1.55;
+}
+.back-link {
+    display: inline-block;
+    margin-top: 18px;
+    color: #f7c83b;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+}
+.back-link:hover { text-decoration: underline; }
+
+/* Password gate */
+.password-gate {
+    background: rgba(3, 27, 50, 0.90);
+    border: 1px solid rgba(247, 200, 59, 0.55);
+    border-radius: 18px;
+    padding: 35px 28px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+}
+.password-gate h2 {
+    color: #f7c83b;
+    font-size: 24px;
+    margin-bottom: 12px;
+}
+.password-gate p {
+    color: #dce8f2;
+    margin-bottom: 22px;
+    font-size: 15px;
+    line-height: 1.5;
+}
+.password-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    max-width: 320px;
+    margin: 0 auto;
+}
+.password-form input {
+    width: 100%;
+    padding: 13px 16px;
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 8px;
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    font-size: 16px;
+    text-align: center;
+}
+.password-form input:focus {
+    outline: 2px solid #f7c83b;
+    outline-offset: 1px;
+}
+.password-error {
+    color: #ffb4b4;
+    font-size: 14px;
+    font-weight: bold;
+    min-height: 20px;
+}
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+    border: 0;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+.button:hover { transform: translateY(-2px); }
+.button-primary {
+    background: #f7c83b;
+    color: #06213b;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.25);
+}
+.button-primary:hover {
+    background: #ffd75e;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+}
+
+/* Updates content (hidden until unlocked) */
+#updates-content { display: none; }
+
+.article {
+    background: rgba(3, 27, 50, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
+    padding: 28px 26px;
+    box-shadow: 0 15px 45px rgba(0,0,0,0.25);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+.article + .article { margin-top: 22px; }
+.article-header {
+    border-bottom: 1px solid rgba(247, 200, 59, 0.35);
+    padding-bottom: 14px;
+    margin-bottom: 18px;
+}
+.article-header h2 {
+    color: #f7c83b;
+    font-size: 22px;
+    margin-bottom: 6px;
+    line-height: 1.3;
+}
+.article-meta {
+    color: #aebfcd;
+    font-size: 13px;
+}
+.article-body {
+    color: #dce8f2;
+    font-size: 15.5px;
+    line-height: 1.7;
+}
+.article-body p { margin-bottom: 14px; }
+.article-body p:last-child { margin-bottom: 0; }
+.article-photos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin-top: 20px;
+}
+.article-photos img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.15);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    display: block;
+}
+.logout-bar {
+    text-align: right;
+    margin-bottom: 8px;
+}
+.logout-btn {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #dce8f2;
+    padding: 8px 16px;
+    font-size: 13px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.logout-btn:hover {
+    background: rgba(255,255,255,0.1);
+}
+footer {
+    text-align: center;
+    padding: 12px 12px 4px;
+    color: #aebfcd;
+    font-size: 13px;
+}
+footer .gold { color: #f7c83b; }
+
+@media (max-width: 600px) {
+    .page { padding: 15px 10px 35px; }
+    .hero { padding: 22px 16px; }
+    .hero-logo { width: 90px; height: 90px; }
+    .article { padding: 20px 16px; }
+    .article-photos { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+<div class="container">
+
+<header class="hero">
+    <img src="Walsall SSUOF Logo.jpg" alt="Walsall Stop and Search & Use of Force Scrutiny Panel" class="hero-logo">
+    <h1>Chair's <span>Updates</span></h1>
+    <p>News and updates from the Chair for panel members.</p>
+    <a class="back-link" href="index.html">← Back to main page</a>
+</header>
+
+<!-- PASSWORD GATE (shown until correct password entered) -->
+<div class="password-gate" id="password-gate">
+    <h2>Members only</h2>
+    <p>Enter the panel password to view Chair's Updates.</p>
+    <form class="password-form" id="password-form" autocomplete="off">
+        <input type="password" id="password-input" placeholder="Password" required>
+        <button type="submit" class="button button-primary">Unlock</button>
+        <p class="password-error" id="password-error"></p>
+    </form>
+</div>
+
+<!-- UPDATES CONTENT (hidden until unlocked) -->
+<div id="updates-content">
+    <div class="logout-bar">
+        <button type="button" class="logout-btn" id="logout-btn">Lock page</button>
+    </div>
+
+    <!-- ========== ARTICLE 1 ========== -->
+    <article class="article">
+        <div class="article-header">
+            <h2>Example: Panel meeting and community event</h2>
+            <p class="article-meta">Posted 5 October 2025</p>
+        </div>
+        <div class="article-body">
+            <p>
+                On 2 October I attended the quarterly panel meeting and a local community event
+                focused on stop and search awareness. The discussion covered recent data trends
+                and feedback from members of the public.
+            </p>
+            <p>
+                Thank you to everyone who contributed. The next meeting is already in the calendar.
+            </p>
+            <!-- Photos: place image files in the same folder and update the src -->
+            <div class="article-photos">
+                <img src="update-photo-1.jpg" alt="Panel meeting">
+                <img src="update-photo-2.jpg" alt="Community event">
+            </div>
+        </div>
+    </article>
+
+    <!-- ========== ARTICLE 2 (copy this block to add more) ========== -->
+    <article class="article">
+        <div class="article-header">
+            <h2>Another update title goes here</h2>
+            <p class="article-meta">Posted 12 September 2025</p>
+        </div>
+        <div class="article-body">
+            <p>
+                Write your update here. You can have several paragraphs.
+            </p>
+            <p>
+                Add as many photos as you like by repeating the &lt;img&gt; tags below
+                and uploading the image files next to this HTML file.
+            </p>
+            <div class="article-photos">
+                <img src="update-photo-3.jpg" alt="Description of the photo">
+            </div>
+        </div>
+    </article>
+
+    <!-- Add more <article class="article"> blocks above this line -->
+
+</div><!-- /updates-content -->
+
+<footer>
+    Walsall Stop & Search and Use of Force Scrutiny Panel
+    <br><br>
+    <span class="gold">Accountability&nbsp; • &nbsp;Fairness&nbsp; • &nbsp;Trust</span>
+</footer>
+
+</div>
+</div>
+
+<script>
+(function () {
+    // === CHANGE THIS PASSWORD ===
+    var CORRECT_PASSWORD = "Panel2025";   // ← set the password you want members to use
+
+    var gate = document.getElementById("password-gate");
+    var content = document.getElementById("updates-content");
+    var form = document.getElementById("password-form");
+    var input = document.getElementById("password-input");
+    var error = document.getElementById("password-error");
+    var logoutBtn = document.getElementById("logout-btn");
+
+    // Remember unlock for this browser session only
+    if (sessionStorage.getItem("chairsUnlocked") === "yes") {
+        showContent();
+    }
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        if (input.value === CORRECT_PASSWORD) {
+            sessionStorage.setItem("chairsUnlocked", "yes");
+            showContent();
+        } else {
+            error.textContent = "Incorrect password. Please try again.";
+            input.value = "";
+            input.focus();
+        }
+    });
+
+    logoutBtn.addEventListener("click", function () {
+        sessionStorage.removeItem("chairsUnlocked");
+        content.style.display = "none";
+        gate.style.display = "block";
+        error.textContent = "";
+        input.value = "";
+    });
+
+    function showContent() {
+        gate.style.display = "none";
+        content.style.display = "block";
+    }
+})();
+</script>
+</body>
+</html>
