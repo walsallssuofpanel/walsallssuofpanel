@@ -548,59 +548,89 @@ footer .gold { color: #f7c83b; }
         });
     }
 
-    // ---------- Upcoming Events Widget ----------
+        // ---------- Upcoming Events Widget ----------
     var ICS_URL = "https://calendar.google.com/calendar/ical/walsallssuofpanel%40gmail.com/public/basic.ics";
-    var PROXY  = "https://api.allorigins.win/raw?url=";
+
+    // Multiple free proxies (tried in order)
+    var PROXIES = [
+        "https://corsproxy.io/?" + encodeURIComponent(ICS_URL),
+        "https://api.allorigins.win/raw?url=" + encodeURIComponent(ICS_URL),
+        "https://api.codetabs.com/v1/proxy?quest=" + encodeURIComponent(ICS_URL)
+    ];
 
     var loadingEl   = document.getElementById("events-loading");
     var slideshowEl = document.getElementById("events-slideshow");
     var emptyEl     = document.getElementById("events-empty");
 
-function parseICS(text) {
-    // First, unfold the ICS lines (join continued lines)
-    text = text.replace(/\r\n[ \t]/g, "").replace(/\n[ \t]/g, "");
-
-    var events = [];
-    var blocks = text.split("BEGIN:VEVENT");
-    for (var i = 1; i < blocks.length; i++) {
-        var block = blocks[i].split("END:VEVENT")[0];
-
-        var summary = (block.match(/SUMMARY:(.+)/) || [])[1] || "Panel Meeting";
-
-        var descMatch = block.match(/DESCRIPTION:([\s\S]*?)(?=\n[A-Z-]+:|$)/);
-        var description = descMatch ? descMatch[1]
-            .replace(/\\n/g, " ")
-            .replace(/\\,/g, ",")
-            .replace(/\\;/g, ";")
-            .replace(/<[^>]+>/g, "")   // remove any HTML tags
-            .replace(/\s+/g, " ")      // clean up extra spaces
-            .trim() : "";
-
-        var dtStart = (block.match(/DTSTART(?:;[^:]*)?:(\d{8}T\d{6}Z|\d{8})/) || [])[1];
-        if (!dtStart) continue;
-
-        var start;
-        if (dtStart.length === 8) {
-            start = new Date(dtStart.substring(0,4) + "-" + dtStart.substring(4,6) + "-" + dtStart.substring(6,8));
-        } else {
-            start = new Date(
-                dtStart.substring(0,4) + "-" +
-                dtStart.substring(4,6) + "-" +
-                dtStart.substring(6,8) + "T" +
-                dtStart.substring(9,11) + ":" +
-                dtStart.substring(11,13) + ":" +
-                dtStart.substring(13,15) + "Z"
-            );
+    // Hard-coded fallback so the widget never stays empty
+    var FALLBACK_EVENTS = [
+        {
+            title: "Panel Meeting",
+            description: "The bimonthly Walsall Stop and Search / Use of Force Scrutiny Panel Meeting provides independent community oversight to ensure local police powers are used fairly, lawfully, and proportionately. The panel reviews statistical data and body-worn video footage to evaluate officer conduct. Findings and recommendations are then submitted directly to West Midlands Police and the West Midlands Police and Crime Commissioner.",
+            start: new Date("2026-11-18T18:00:00Z")
+        },
+        {
+            title: "Panel Meeting",
+            description: "The bimonthly Walsall Stop and Search / Use of Force Scrutiny Panel Meeting provides independent community oversight to ensure local police powers are used fairly, lawfully, and proportionately. The panel reviews statistical data and body-worn video footage to evaluate officer conduct. Findings and recommendations are then submitted directly to West Midlands Police and the West Midlands Police and Crime Commissioner.",
+            start: new Date("2027-02-10T18:00:00Z")
+        },
+        {
+            title: "Panel Meeting",
+            description: "The bimonthly Walsall Stop and Search / Use of Force Scrutiny Panel Meeting provides independent community oversight to ensure local police powers are used fairly, lawfully, and proportionately. The panel reviews statistical data and body-worn video footage to evaluate officer conduct. Findings and recommendations are then submitted directly to West Midlands Police and the West Midlands Police and Crime Commissioner.",
+            start: new Date("2027-04-14T17:00:00Z")
+        },
+        {
+            title: "Panel Meeting",
+            description: "The bimonthly Walsall Stop and Search / Use of Force Scrutiny Panel Meeting provides independent community oversight to ensure local police powers are used fairly, lawfully, and proportionately. The panel reviews statistical data and body-worn video footage to evaluate officer conduct. Findings and recommendations are then submitted directly to West Midlands Police and the West Midlands Police and Crime Commissioner.",
+            start: new Date("2027-10-13T17:00:00Z")
         }
+    ];
 
-        events.push({
-            title: summary.trim(),
-            description: description,
-            start: start
-        });
+    function parseICS(text) {
+        // Unfold continued lines
+        text = text.replace(/\r\n[ \t]/g, "").replace(/\n[ \t]/g, "");
+
+        var events = [];
+        var blocks = text.split("BEGIN:VEVENT");
+        for (var i = 1; i < blocks.length; i++) {
+            var block = blocks[i].split("END:VEVENT")[0];
+
+            var summary = (block.match(/SUMMARY:(.+)/) || [])[1] || "Panel Meeting";
+
+            var descMatch = block.match(/DESCRIPTION:([\s\S]*?)(?=\n[A-Z-]+:|$)/);
+            var description = descMatch ? descMatch[1]
+                .replace(/\\n/g, " ")
+                .replace(/\\,/g, ",")
+                .replace(/\\;/g, ";")
+                .replace(/<[^>]+>/g, "")
+                .replace(/\s+/g, " ")
+                .trim() : "";
+
+            var dtStart = (block.match(/DTSTART(?:;[^:]*)?:(\d{8}T\d{6}Z|\d{8})/) || [])[1];
+            if (!dtStart) continue;
+
+            var start;
+            if (dtStart.length === 8) {
+                start = new Date(dtStart.substring(0,4) + "-" + dtStart.substring(4,6) + "-" + dtStart.substring(6,8));
+            } else {
+                start = new Date(
+                    dtStart.substring(0,4) + "-" +
+                    dtStart.substring(4,6) + "-" +
+                    dtStart.substring(6,8) + "T" +
+                    dtStart.substring(9,11) + ":" +
+                    dtStart.substring(11,13) + ":" +
+                    dtStart.substring(13,15) + "Z"
+                );
+            }
+
+            events.push({
+                title: summary.trim(),
+                description: description,
+                start: start
+            });
+        }
+        return events;
     }
-    return events;
-}
 
     function formatDate(d) {
         return d.toLocaleDateString("en-GB", {
@@ -683,6 +713,33 @@ function parseICS(text) {
         timer = setInterval(next, 6000);
     }
 
+    // Try proxies one by one. If all fail, use the hard-coded fallback.
+    function tryFetch(index) {
+        if (index >= PROXIES.length) {
+            // All proxies failed → use fallback
+            console.warn("All proxies failed – using fallback events");
+            renderEvents(FALLBACK_EVENTS);
+            return;
+        }
+
+        fetch(PROXIES[index], { cache: "no-store" })
+            .then(function (r) {
+                if (!r.ok) throw new Error("Proxy status " + r.status);
+                return r.text();
+            })
+            .then(function (ics) {
+                if (ics.indexOf("BEGIN:VCALENDAR") === -1) throw new Error("Not valid ICS");
+                var events = parseICS(ics);
+                if (events.length === 0) throw new Error("No events found");
+                renderEvents(events);
+            })
+            .catch(function (err) {
+                console.warn("Proxy " + index + " failed:", err.message);
+                tryFetch(index + 1);   // try next proxy
+            });
+    }
+
+    tryFetch(0);
     // Load the calendar feed
     fetch(PROXY + encodeURIComponent(ICS_URL))
         .then(function (r) { return r.text(); })
