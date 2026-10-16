@@ -709,11 +709,11 @@ footer .gold { color: #f7c83b; }
             dot.addEventListener("click", function () {
                 clearInterval(timer);
                 show(parseInt(dot.getAttribute("data-index"), 10));
-                timer = setInterval(next, 6000);
+                timer = setInterval(next, 15000);
             });
         });
 
-        timer = setInterval(next, 6000);
+        timer = setInterval(next, 15000);
     }
 
     function tryFetch(index) {
