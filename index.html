@@ -260,7 +260,7 @@ body {
 .event-desc {
     font-size: 14px;
     color: #b9cad8;
-    max-width: 520px;
+    max-width: 620px;
     margin: 0 auto;
     line-height: 1.55;
 }
@@ -568,7 +568,7 @@ footer .gold { color: #f7c83b; }
                 .replace(/\\,/g, ",")
                 .replace(/<[^>]+>/g, "")
                 .trim() : "";
-            if (description.length > 160) description = description.substring(0, 157) + "…";
+           
 
             var dtStart = (block.match(/DTSTART(?:;[^:]*)?:(\d{8}T\d{6}Z|\d{8})/) || [])[1];
             if (!dtStart) continue;
