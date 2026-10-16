@@ -195,6 +195,8 @@ body {
     margin-top: 10px;
     max-width: 160px;
 }
+
+/* ===== Calendar / Events Widget ===== */
 .calendar-section {
     background: rgba(3, 27, 50, 0.90);
     border: 1px solid rgba(247, 200, 59, 0.4);
@@ -208,28 +210,88 @@ body {
 .calendar-heading h2 { font-size: 30px; color: #ffffff; margin-bottom: 7px; }
 .calendar-heading h2 span { color: #f7c83b; }
 .calendar-heading p { color: #b9cad8; font-size: 14px; }
-.calendar-toolbar { display: flex; justify-content: center; margin: 14px 0 0; }
-.calendar-refresh {
-    border: 0;
-    cursor: pointer;
-    min-height: 40px;
-    padding: 10px 18px;
-    font-size: 14px;
-}
-.calendar-frame {
-    width: 100%;
+
+.events-widget {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(247, 200, 59, 0.25);
+    border-radius: 16px;
+    padding: 28px 20px;
+    min-height: 220px;
+    position: relative;
     overflow: hidden;
-    border-radius: 12px;
-    background: #ffffff;
-    box-shadow: 0 10px 35px rgba(0,0,0,0.3);
 }
-.calendar-frame iframe {
-    width: 100%;
-    min-height: 650px;
-    border: 0;
+.events-loading,
+.events-empty {
+    text-align: center;
+    color: #b9cad8;
+    font-size: 16px;
+    padding: 40px 10px;
 }
-.calendar-frame iframe.calendar-desktop { display: block; }
-.calendar-frame iframe.calendar-mobile { display: none; }
+.events-slideshow {
+    display: none;
+}
+.event-card {
+    display: none;
+    text-align: center;
+    animation: fadeIn 0.6s ease;
+}
+.event-card.active {
+    display: block;
+}
+.event-date {
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #f7c83b;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+.event-title {
+    font-size: 26px;
+    color: #ffffff;
+    margin-bottom: 10px;
+    line-height: 1.25;
+}
+.event-time {
+    font-size: 16px;
+    color: #dce8f2;
+    margin-bottom: 14px;
+}
+.event-desc {
+    font-size: 14px;
+    color: #b9cad8;
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.55;
+}
+.events-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 22px;
+}
+.events-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.25s;
+}
+.events-dot.active {
+    background: #f7c83b;
+}
+.calendar-footer {
+    text-align: center;
+    margin-top: 22px;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
 .contact-section {
     background: rgba(3, 27, 50, 0.90);
     border: 1px solid rgba(247, 200, 59, 0.55);
@@ -289,6 +351,7 @@ body {
 .form-status.error { color: #ffb4b4; }
 footer { text-align: center; padding: 8px 12px 4px; color: #aebfcd; font-size: 13px; }
 footer .gold { color: #f7c83b; }
+
 @media (max-width: 750px) {
     .page { padding: 15px 10px 35px; }
     .hero { padding: 25px 17px; border-radius: 16px; }
@@ -302,11 +365,10 @@ footer .gold { color: #f7c83b; }
     .recruitment-content { grid-template-columns: 1fr; gap: 25px; }
     .recruitment-audio { padding: 20px; }
     .recruitment-qr { max-width: 220px; margin: 0 auto; width: 100%; }
-    .calendar-section { padding: 12px; border-radius: 15px; }
+    .calendar-section { padding: 18px; border-radius: 15px; }
     .calendar-heading h2 { font-size: 24px; }
-    .calendar-frame iframe { min-height: 520px; }
-    .calendar-frame iframe.calendar-desktop { display: none; }
-    .calendar-frame iframe.calendar-mobile { display: block; }
+    .event-title { font-size: 22px; }
+    .events-widget { padding: 22px 14px; }
     .contact-section { padding: 18px; }
     .contact-header h2 { font-size: 26px; }
     .form-row { grid-template-columns: 1fr; }
@@ -318,6 +380,7 @@ footer .gold { color: #f7c83b; }
 <body>
 <div class="page">
 <div class="container">
+
 <header class="hero">
     <img src="Walsall SSUOF Logo.jpg" alt="Walsall Stop and Search & Use of Force Scrutiny Panel" class="hero-logo">
     <h1>
@@ -336,6 +399,7 @@ footer .gold { color: #f7c83b; }
         <a class="button button-secondary" href="chairs-updates.html">Chair's Updates</a>
     </div>
 </header>
+
 <section class="intro-grid">
     <div class="card">
         <h2>Stop & Search</h2>
@@ -356,6 +420,7 @@ footer .gold { color: #f7c83b; }
         </p>
     </div>
 </section>
+
 <section class="recruitment-section" id="recruitment">
     <div class="recruitment-header">
         <h2><span>Join</span> the Scrutiny Panel</h2>
@@ -381,37 +446,31 @@ footer .gold { color: #f7c83b; }
         </div>
     </div>
 </section>
+
+<!-- ===== NEW UPCOMING MEETINGS WIDGET ===== -->
 <section class="calendar-section" id="calendar">
     <div class="calendar-heading">
-        <h2>Panel <span>Calendar</span></h2>
-        <p>Upcoming meetings and scheduled panel activity</p>
-        <div class="calendar-toolbar">
-            <button type="button" class="button button-secondary calendar-refresh" id="calendar-refresh">Reload calendar</button>
+        <h2>Upcoming <span>Panel Meetings</span></h2>
+        <p>Next scheduled meetings of the Walsall Stop & Search and Use of Force Scrutiny Panel</p>
+    </div>
+
+    <div class="events-widget" id="events-widget">
+        <div class="events-loading" id="events-loading">Loading upcoming meetings…</div>
+        <div class="events-slideshow" id="events-slideshow" aria-live="polite"></div>
+        <div class="events-empty" id="events-empty" style="display:none;">
+            No upcoming meetings currently listed.
         </div>
     </div>
-    <div class="calendar-frame">
-        <iframe
-    id="panel-calendar"
-    class="calendar-desktop"
-    src="https://calendar.google.com/calendar/embed?src=walsallssuofpanel%40gmail.com&ctz=Europe%2FLondon&mode=MONTH&showTitle=0&showNav=0&showDate=0&showPrint=0&showTabs=1&showCalendars=0&showTz=0"
-    width="800"
-    height="600"
-    frameborder="0"
-    scrolling="no"
-    title="Walsall Stop and Search and Use of Force Scrutiny Panel Calendar"
-></iframe>
-<iframe
-    id="panel-calendar-mobile"
-    class="calendar-mobile"
-    src="https://calendar.google.com/calendar/embed?src=walsallssuofpanel%40gmail.com&ctz=Europe%2FLondon&mode=AGENDA&showTitle=0&showNav=0&showDate=0&showPrint=0&showTabs=1&showCalendars=0&showTz=0"
-    width="800"
-    height="600"
-    frameborder="0"
-    scrolling="no"
-    title="Walsall Stop and Search and Use of Force Scrutiny Panel Calendar"
-></iframe>
+
+    <div class="calendar-footer">
+        <a href="https://calendar.google.com/calendar/embed?src=walsallssuofpanel%40gmail.com&ctz=Europe%2FLondon"
+           target="_blank" rel="noopener noreferrer"
+           class="button button-secondary">
+            Open full calendar ↗
+        </a>
     </div>
 </section>
+
 <section class="contact-section" id="contact">
     <div class="contact-header">
         <h2><span>Contact</span> the Panel</h2>
@@ -451,60 +510,191 @@ footer .gold { color: #f7c83b; }
         </div>
     </form>
 </section>
+
 <footer>
     Walsall Stop & Search and Use of Force Scrutiny Panel
     <br><br>
     <span class="gold">Accountability&nbsp; • &nbsp;Fairness&nbsp; • &nbsp;Trust</span>
 </footer>
+
 </div>
 </div>
+
 <script>
 (function () {
+    // ---------- Contact form ----------
     var form = document.getElementById("contact-form");
     var status = document.getElementById("contact-status");
     var button = document.getElementById("contact-submit");
-    var calendar = document.getElementById("panel-calendar");
-    var calendarMobile = document.getElementById("panel-calendar-mobile");
-    var reloadBtn = document.getElementById("calendar-refresh");
-    var calendarSrc = calendar ? calendar.getAttribute("src") : "";
-    var calendarMobileSrc = calendarMobile ? calendarMobile.getAttribute("src") : "";
 
-    if (reloadBtn) {
-        reloadBtn.addEventListener("click", function () {
-            if (calendar && calendarSrc) calendar.src = calendarSrc;
-            if (calendarMobile && calendarMobileSrc) calendarMobile.src = calendarMobileSrc;
+    if (form) {
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+            status.className = "form-status";
+            status.textContent = "Sending…";
+            button.disabled = true;
+            fetch("https://formspree.io/f/mkjgzebe", {
+                method: "POST",
+                body: new FormData(form),
+                headers: { "Accept": "application/json" }
+            }).then(function (response) {
+                if (response.ok) {
+                    form.reset();
+                    status.className = "form-status success";
+                    status.textContent = "Thank you. Your message has been sent.";
+                } else {
+                    return response.json().then(function (data) {
+                        throw new Error((data && data.error) || "Please check the form and try again.");
+                    });
+                }
+            }).catch(function () {
+                status.className = "form-status error";
+                status.textContent = "Sorry, the message could not be sent. Please try again shortly.";
+            }).finally(function () {
+                button.disabled = false;
+            });
         });
     }
 
-    if (!form) return;
+    // ---------- Upcoming Events Widget ----------
+    var ICS_URL = "https://calendar.google.com/calendar/ical/walsallssuofpanel%40gmail.com/public/basic.ics";
+    var PROXY  = "https://api.allorigins.win/raw?url=";
 
-    form.addEventListener("submit", function (event) {
-        event.preventDefault();
-        status.className = "form-status";
-        status.textContent = "Sending…";
-        button.disabled = true;
+    var loadingEl   = document.getElementById("events-loading");
+    var slideshowEl = document.getElementById("events-slideshow");
+    var emptyEl     = document.getElementById("events-empty");
 
-        fetch("https://formspree.io/f/mkjgzebe", {
-            method: "POST",
-            body: new FormData(form),
-            headers: { "Accept": "application/json" }
-        }).then(function (response) {
-            if (response.ok) {
-                form.reset();
-                status.className = "form-status success";
-                status.textContent = "Thank you. Your message has been sent.";
+    function parseICS(text) {
+        var events = [];
+        var blocks = text.split("BEGIN:VEVENT");
+        for (var i = 1; i < blocks.length; i++) {
+            var block = blocks[i].split("END:VEVENT")[0];
+            var summary = (block.match(/SUMMARY:(.+)/) || [])[1] || "Panel Meeting";
+            var descMatch = block.match(/DESCRIPTION:([\s\S]*?)(?=\n[A-Z-]+:|$)/);
+            var description = descMatch ? descMatch[1]
+                .replace(/\\n/g, " ")
+                .replace(/\\,/g, ",")
+                .replace(/<[^>]+>/g, "")
+                .trim() : "";
+            if (description.length > 160) description = description.substring(0, 157) + "…";
+
+            var dtStart = (block.match(/DTSTART(?:;[^:]*)?:(\d{8}T\d{6}Z|\d{8})/) || [])[1];
+            if (!dtStart) continue;
+
+            var start;
+            if (dtStart.length === 8) {
+                start = new Date(dtStart.substring(0,4) + "-" + dtStart.substring(4,6) + "-" + dtStart.substring(6,8));
             } else {
-                return response.json().then(function (data) {
-                    throw new Error((data && data.error) || "Please check the form and try again.");
-                });
+                start = new Date(
+                    dtStart.substring(0,4) + "-" +
+                    dtStart.substring(4,6) + "-" +
+                    dtStart.substring(6,8) + "T" +
+                    dtStart.substring(9,11) + ":" +
+                    dtStart.substring(11,13) + ":" +
+                    dtStart.substring(13,15) + "Z"
+                );
             }
-        }).catch(function () {
-            status.className = "form-status error";
-            status.textContent = "Sorry, the message could not be sent. Please try again shortly.";
-        }).finally(function () {
-            button.disabled = false;
+            events.push({
+                title: summary.trim(),
+                description: description,
+                start: start
+            });
+        }
+        return events;
+    }
+
+    function formatDate(d) {
+        return d.toLocaleDateString("en-GB", {
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+            year: "numeric"
         });
-    });
+    }
+
+    function formatTime(d) {
+        return d.toLocaleTimeString("en-GB", {
+            hour: "2-digit",
+            minute: "2-digit",
+            timeZone: "Europe/London"
+        });
+    }
+
+    function renderEvents(events) {
+        var now = new Date();
+        var upcoming = events
+            .filter(function (e) { return e.start >= now; })
+            .sort(function (a, b) { return a.start - b.start; })
+            .slice(0, 6);
+
+        if (upcoming.length === 0) {
+            loadingEl.style.display = "none";
+            emptyEl.style.display = "block";
+            return;
+        }
+
+        var html = "";
+        upcoming.forEach(function (ev, idx) {
+            html += '<div class="event-card' + (idx === 0 ? ' active' : '') + '" data-index="' + idx + '">';
+            html +=   '<div class="event-date">' + formatDate(ev.start) + '</div>';
+            html +=   '<div class="event-title">' + ev.title + '</div>';
+            html +=   '<div class="event-time">' + formatTime(ev.start) + ' (UK time)</div>';
+            if (ev.description) {
+                html += '<div class="event-desc">' + ev.description + '</div>';
+            }
+            html += '</div>';
+        });
+
+        html += '<div class="events-dots">';
+        upcoming.forEach(function (_, idx) {
+            html += '<button type="button" class="events-dot' + (idx === 0 ? ' active' : '') +
+                    '" data-index="' + idx + '" aria-label="Show meeting ' + (idx + 1) + '"></button>';
+        });
+        html += '</div>';
+
+        slideshowEl.innerHTML = html;
+        loadingEl.style.display = "none";
+        slideshowEl.style.display = "block";
+
+        var cards = slideshowEl.querySelectorAll(".event-card");
+        var dots  = slideshowEl.querySelectorAll(".events-dot");
+        var current = 0;
+        var timer;
+
+        function show(idx) {
+            cards[current].classList.remove("active");
+            dots[current].classList.remove("active");
+            current = idx;
+            cards[current].classList.add("active");
+            dots[current].classList.add("active");
+        }
+
+        function next() {
+            show((current + 1) % cards.length);
+        }
+
+        dots.forEach(function (dot) {
+            dot.addEventListener("click", function () {
+                clearInterval(timer);
+                show(parseInt(dot.getAttribute("data-index"), 10));
+                timer = setInterval(next, 6000);
+            });
+        });
+
+        timer = setInterval(next, 6000);
+    }
+
+    // Load the calendar feed
+    fetch(PROXY + encodeURIComponent(ICS_URL))
+        .then(function (r) { return r.text(); })
+        .then(function (ics) {
+            var events = parseICS(ics);
+            renderEvents(events);
+        })
+        .catch(function (err) {
+            console.warn("Could not load calendar:", err);
+            loadingEl.textContent = "Unable to load meetings at the moment. Please use the full calendar link below.";
+        });
 })();
 </script>
 </body>
